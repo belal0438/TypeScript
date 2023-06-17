@@ -3,12 +3,13 @@ const Num1Element = document.getElementById('num1') as HTMLInputElement;
 const Num2Element = document.getElementById('num2') as HTMLInputElement;
 const ButtonElement = document.querySelector('button')!;
 
-const numResults: number[] = [];
+const numResults: Array<number> = [];
 const textResults: string[] = [];
 
 
 
-type NumOrString = number | string
+type NumOrString = number | string;
+
 
 function Add(num1: NumOrString, num2: NumOrString) {
     if (typeof num1 === 'number' && typeof num2 === 'number') {
@@ -20,7 +21,14 @@ function Add(num1: NumOrString, num2: NumOrString) {
 }
 
 
-function printResult(resultObj: { val: number; timestamp: Date }) {
+type Result = { val: number; timestamp: Date }
+
+interface ResultObj {
+    val: number;
+    timestamp: Date;
+}
+
+function printResult(resultObj: ResultObj) {
     console.log(resultObj.val)
 }
 
@@ -43,3 +51,12 @@ ButtonElement.addEventListener('click', () => {
 });
 
 
+const myPromise = new Promise<string>((resolve, reject) => {
+    setTimeout(() => {
+        resolve('It worked!');
+    }, 100)
+});
+
+myPromise.then((result) => {
+    console.log(result.split('w'));
+})
